@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>blank</title>
+      <style type="text/css">
+   </style>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+      <script> function check(){
+          return confirm("delete post?")}
+      </script>
+   </head>
+   <body>
+
+    <div id="top"class="top"></div>
+    
+    <div class="maintext">
+		<div id="left"class="left"></div>
+	
+		<div id="middle"class="middle">
+		  	<h1 id="header" th:text="${post.getName}"></h1>
+      		<p th:text="${post.getContext}"></p>
+      		
+      		<p th:text="${owner}"></p>
+    	</div>
+    
+		<div id="right"class="right"></div>
+	</div>
+	
+	<div style="width:100%">
+	<div class="select-image">
+            <th:block th:each="image : ${gallery}">
+      			<div class="div-flex"> <a th:href="@{'/'+${image.getUrlToPicture}}">
+      			<img style="height:100%" th:src="@{'/'+${image.getUrlToPicture}}" alt="hz"/></a>
+      			</div>
+      		</th:block>
+      		<div></div>
+      	<div th:if="${isOwner == 'yes'}">
+      	<form method="post" enctype="multipart/form-data" action="/add-image">
+  			<label for="img">Select image:</label>
+  			<input type="file" id="img" name="img" accept="image/*">
+      		<input type="hidden" th:name="postname" th:value="${post.getName}"/>
+      		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+     		<input type="Submit">
+     	</form>
+      	</div>
+     </div>
+     <div class="select-image">
+            <th:block th:each="tag : ${tags}">
+      			<div th:utext="${tag.getName}" class="div-flex"></div>
+      			<div>
+				<div style="background-color:CCCCCC; height:16px;font-size:16px;float:left;" th:utext="${tag.getName}">
+				</div>
+				<form method="post" action="/delete-tag">
+				<input type="hidden" th:name="name" th:value="${tag.getName}"/>
+				<input type="hidden" th:name="postname" th:value="${post.getName}"/>
+		      	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				<button style="height:16px;width:16px;text-align:left;">x</button>
+				</form>
+				
+      			</div>
+      		</th:block>
+      		<p></p>
+      	<div th:if="${isOwner == 'yes'}">
+      	<form method="post" enctype="multipart/form-data" action="/add-tag">
+  			<label for="tag">Enter tag:</label>
+  			<input type="text" id="tag" name="tag">
+      		<input type="hidden" th:name="postname" th:value="${post.getName}"/>
+      		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+     		<input type="Submit">
+     	</form>
+      	</div>
+     </div>
+     
+      <div th:if="${isOwner == 'yes'}">
+      <form method="post" action="/delete-post" onsubmit="return check()">
+      	<input type="hidden" th:name="postname" th:value="${post.getName}"> 
+      	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    	<button type="submit" name="action">delete post</button>
+	 </form>
+      </div>
+	</div>
+   
+   </body>
+   
+</html>
+ 

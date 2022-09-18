@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>blank</title>
+      <style type="text/css">
+   </style>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+   </head>
+   <body>
+
+    <div id="top"class="top"></div>
+    
+    <div class="maintext">
+		<div id="left"class="left"></div>
+	
+		<div id="middle"class="middle" align="center">
+		  	<div class="container">
+      <form class="form-signin" method="post" th:action="@{/register}">
+        <h2 class="form-signin-heading">try-to register</h2>
+        <p>
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Username">
+        </p>
+        <p>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Password">
+        </p>
+        <p>
+          <label for="visiblename">visiblename</label>
+          <input type="text" id="visiblename" name="visiblename" placeholder="visiblename">
+        </p>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        
+        <input type="submit">Sign in
+      </form>
+      <p th:utext="${msg}"></p>
+</div>
+    	</div>
+    
+		<div id="right"class="right"></div>
+	</div>
+     
+</body></html>

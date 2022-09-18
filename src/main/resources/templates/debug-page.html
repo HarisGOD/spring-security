@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>blank</title>
+      <style type="text/css">
+   .block1 { 
+
+   }
+   </style>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+   </head>
+   <body>
+      <h1>blank</h1>
+      <p> type <p/>
+      <th:block th:each="user : ${a}">
+
+      <p th:utext="${user.getUsername}"></p>
+
+      </th:block>
+   <p><a th:href="@{blank} " target="_blank" >__nothing__ </a> <p/>
+   
+   </body>
+   
+</html>
+ 
